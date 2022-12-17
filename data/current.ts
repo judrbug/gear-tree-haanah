@@ -325,6 +325,33 @@ const current: Omit<GearItem, "id">[] = [
     weightOz: 13.2,
     volumeL: 0.3,
   },
+  {
+    name: "Patagonia Nano Puff",
+    link: "https://www.rei.com/product/102404/patagonia-nano-puff-jacket-mens",
+    category: Category.Clothing,
+    type: ItemType.Jacket,
+    price: 229.0,
+    weightOz: 12.0,
+    volumeL: 3,
+  },
+  {
+    name: "Berghaus",
+    link: "https://www.berghaus.com/men-s-mtn-seeker-gtx-jacket-black-red/13832711.html",
+    category: Category.Clothing,
+    type: ItemType.Jacket,
+    price: 388.0,
+    weightOz: 20.8,
+    volumeL: 4.4,
+  },
+  {
+    name: "Double Black Diamond",
+    link: "https://costco97.com/double-black-diamond-packable-throw/",
+    category: Category.Sleeping,
+    type: ItemType.Blanket,
+    price: 15.0,
+    weightOz: 16.4,
+    volumeL: 5.2,
+  },
 ];
 
 export default current.map<GearItem>((item, id) => ({ ...item, id }));

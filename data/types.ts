@@ -8,11 +8,13 @@ export enum Category {
   Tools = "Tools",
   Safety = "Safety",
   Photography = "Photography",
+  Clothing = "Clothing",
 }
 
 export enum ItemType {
   SleepingBag = "Sleeping Bag",
   UnderQuilt = "Underquilt",
+  Blanket = "Blanket",
   Hammock = "Hammock",
   SleepingPad = "Sleeping Pad",
   Pillow = "Pillow",
@@ -36,6 +38,7 @@ export enum ItemType {
   Camera = "Camera",
   Lens = "Lens",
   Drone = "Drone",
+  Jacket = "Jacket",
 }
 
 export interface GearItem {
