@@ -370,6 +370,42 @@ const current: Omit<GearItem, "id">[] = [
     weightOz: 16.4,
     volumeL: 5.2,
   },
+  {
+    name: "Nalgene 30mL",
+    link: "https://www.containerstore.com/s/travel/bottles-medication/nalgene-wide-mouth-leakproof-travel-bottles/12d?productId=10000247",
+    category: Category.Bags,
+    type: ItemType.Container,
+    price: 1.79,
+    weightOz: 0.4,
+    volumeL: 0.1,
+  },
+  {
+    name: "Pill Container",
+    link: "#",
+    category: Category.Safety,
+    type: ItemType.FirstAid,
+    price: 0,
+    weightOz: 1.0,
+    volumeL: 0.1,
+  },
+  {
+    name: "SunBum SPF 30 Lip Balm",
+    link: "https://www.sunbum.com/products/spf-30-sunscreen-lip-balm-coconut",
+    category: Category.Safety,
+    type: ItemType.FirstAid,
+    price: 3.99,
+    weightOz: 0.3,
+    volumeL: 0,
+  },
+  {
+    name: "Klymit X Pillow",
+    link: "https://klymit.com/products/pillow-x",
+    category: Category.Sleeping,
+    type: ItemType.Pillow,
+    price: 26.99,
+    weightOz: 2.6,
+    volumeL: 0.2,
+  },
 ];
 
 export default current.map<GearItem>((item, id) => ({ ...item, id }));
