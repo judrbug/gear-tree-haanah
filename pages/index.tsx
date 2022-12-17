@@ -87,7 +87,7 @@ export default function Home() {
                   {current
                     .filter(({ id }) => selected.has(id))
                     .reduce((sum, { price }) => sum + price, 0)
-                    .toFixed(1)}
+                    .toFixed(2)}
                 </li>
               </ul>
             </div>
