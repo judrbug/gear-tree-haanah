@@ -10,7 +10,7 @@
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
-   "import/extensions": [
+    "import/extensions": [
       "error",
       "ignorePackages",
       {
@@ -19,7 +19,9 @@
         "ts": "never",
         "tsx": "never"
       }
-   ],
+    ],
+    "no-shadow": "off",
+    "no-unused-vars": "off",
     "react/destructuring-assignment": "off"
   }
 }
