@@ -7,6 +7,7 @@ export enum Category {
   Comfort = "Comfort",
   Tools = "Tools",
   Safety = "Safety",
+  Photography = "Photography",
 }
 
 export enum ItemType {
@@ -32,6 +33,8 @@ export enum ItemType {
   Cord = "Cord",
   Stove = "Stove",
   Fuel = "Fuel",
+  Camera = "Camera",
+  Lens = "Lens",
 }
 
 export interface GearItem {
