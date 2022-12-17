@@ -82,13 +82,6 @@ export default function Home() {
                     .toFixed(1)}{" "}
                   Liters
                 </li>
-                <li>
-                  Total Cost: $
-                  {current
-                    .filter(({ id }) => selected.has(id))
-                    .reduce((sum, { price }) => sum + price, 0)
-                    .toFixed(2)}
-                </li>
               </ul>
             </div>
           </div>
