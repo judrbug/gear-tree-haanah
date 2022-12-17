@@ -76,8 +76,8 @@ const current: GearItem[] = [
   {
     name: "Rallt Hammock Straps",
     link: "https://www.rallt.com/products/hammock-straps",
-    category: Category.Sleeping,
-    type: ItemType.Hammock,
+    category: Category.Tools,
+    type: ItemType.Cord,
     price: 19.99,
     weightOz: 11.4,
     volumeL: 0.6,
@@ -218,7 +218,7 @@ const current: GearItem[] = [
     volumeL: 0.1,
   },
   {
-    name: "REI Quarter Dome SL 2 With Fly/Footprint",
+    name: "REI Quarter Dome SL 2 With Fly/FP",
     link: "https://www.rei.com/product/147863/rei-co-op-quarter-dome-sl-2-tent",
     category: Category.Shelter,
     type: ItemType.Tent,

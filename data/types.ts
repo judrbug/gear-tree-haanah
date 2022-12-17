@@ -1,7 +1,6 @@
 export enum Category {
   Sleeping = "Sleeping",
   Shelter = "Shelter",
-  Clothing = "Clothing",
   Bags = "Bags",
   Water = "Water",
   Electronics = "Electronics",
