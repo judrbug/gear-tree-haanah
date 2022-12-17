@@ -8,27 +8,17 @@ interface TreeChartProps {
 }
 
 export default function TreeChart({ data }: TreeChartProps) {
-  const [isCSR, setIsCSR] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsCSR(true);
-    }
-  }, []);
-
-  if (!isCSR) {
-    return null;
-  }
-
-  const series = Object.entries(Category).map(([key, category]) => ({
-    name: category,
-    data: data
-      .filter(({ category: itemCategory }) => itemCategory === category)
-      .map((item) => ({
-        x: item.name,
-        y: (item.weightOz / 16).toFixed(2),
-      })),
-  }));
+  const series = Object.entries(Category)
+    .map(([, category]) => ({
+      name: category,
+      data: data
+        .filter(({ category: itemCategory }) => itemCategory === category)
+        .map((item) => ({
+          x: item.name,
+          y: (item.weightOz / 16).toFixed(2),
+        })),
+    }))
+    .filter(({ data }) => data.length > 0);
 
   const options: ApexOptions = {
     title: {
