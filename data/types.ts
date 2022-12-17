@@ -41,6 +41,7 @@ export enum ItemType {
   Drone = "Drone",
   Jacket = "Jacket",
   Earplugs = "Earplugs",
+  Knife = "Knife"
 }
 
 export interface GearItem {
