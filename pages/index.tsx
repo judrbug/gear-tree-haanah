@@ -1,11 +1,16 @@
 import { ChangeEventHandler, useCallback } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 
 import styles from "../styles/Home.module.css";
 
 import { Category } from "../data/types";
 import current from "../data/current";
 import useLocalSelection from "../concerns/hooks/localStorage";
+
+const TreeChart = dynamic(() => import("../components/tree-chart"), {
+  ssr: false,
+});
 
 const SelectedKey = "GearSelected";
 
@@ -87,6 +92,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
+            <TreeChart data={Array.from(selected).map((id) => current[id])} />
           </div>
         </div>
       </main>
