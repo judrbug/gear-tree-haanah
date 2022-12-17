@@ -1,42 +1,13 @@
-import { ChangeEventHandler, useCallback, useState, useEffect } from "react";
+import { ChangeEventHandler, useCallback } from "react";
 import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 
 import { Category } from "../data/types";
 import current from "../data/current";
+import useLocalSelection from "../concerns/hooks/localStorage";
 
 const SelectedKey = "GearSelected";
-
-const useLocalSelection = (
-  key: string
-): [Set<number>, (id: number, selected: boolean) => void] => {
-  const [selected, setSelected] = useState<Set<number>>(new Set());
-
-  useEffect(() => {
-    const extant = localStorage.getItem(key);
-
-    if (extant === null) {
-      localStorage.setItem(key, "[]");
-    } else {
-      setSelected(new Set<number>(JSON.parse(extant)));
-    }
-  }, [key]);
-
-  const synchronize = (id: number, shouldSelect: boolean) => {
-    if (shouldSelect) {
-      selected.add(id);
-    } else {
-      selected.delete(id);
-    }
-
-    const values = Array.from(selected);
-    localStorage.setItem(key, JSON.stringify(values));
-    setSelected(new Set(values));
-  };
-
-  return [selected, synchronize];
-};
 
 export default function Home() {
   const [selected, setSelected] = useLocalSelection(SelectedKey);
