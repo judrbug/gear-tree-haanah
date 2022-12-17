@@ -1,55 +1,57 @@
-import { ChangeEventHandler, useCallback, useState } from "react";
+import { ChangeEventHandler, useMemo, useCallback, useState } from "react";
 import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 
-import { GearItem, Category, ItemType } from "../data/types";
+import { Category } from "../data/types";
 import current from "../data/current";
 
-interface ItemMeta extends GearItem {
-  id: number;
-  selected: boolean;
-}
+const SelectedKey = "GearSelected";
 
-const currentWithMeta = current.map((item, id) => ({
-  ...item,
-  selected: false,
-  id,
-}));
+const useLocalSelection = (
+  key: string
+): [Set<number>, (id: number, selected: boolean) => void] => {
+  const initialStorageValue = useMemo<Set<number>>(() => {
+    if (typeof window === "undefined") {
+      return new Set();
+    }
 
-const useManifest = (
-  gearManifest: ItemMeta[]
-): [(id: number) => void, (id: number) => void, ItemMeta[]] => {
-  const [manifest, setManifest] = useState<ItemMeta[]>(gearManifest);
+    const extant = localStorage.getItem(key);
 
-  const select = useCallback(
-    (id: number) => {
-      manifest[id].selected = true;
-      setManifest([...manifest]);
-    },
-    [manifest]
-  );
+    if (extant === null) {
+      localStorage.setItem(key, "[]");
 
-  const deselect = useCallback(
-    (id: number) => {
-      manifest[id].selected = false;
-      setManifest([...manifest]);
-    },
-    [manifest]
-  );
+      return new Set<number>();
+    }
 
-  return [select, deselect, manifest];
+    return new Set<number>(JSON.parse(extant));
+  }, [key]);
+
+  const [selected, setSelected] = useState<Set<number>>(initialStorageValue);
+
+  const synchronize = (id: number, shouldSelect: boolean) => {
+    if (shouldSelect) {
+      selected.add(id);
+    } else {
+      selected.delete(id);
+    }
+
+    const values = Array.from(selected);
+    localStorage.setItem(key, JSON.stringify(values));
+    setSelected(new Set(values));
+  };
+
+  return [selected, synchronize];
 };
 
 export default function Home() {
-  const [select, deselect, manifest] = useManifest(currentWithMeta);
+  const [selected, setSelected] = useLocalSelection(SelectedKey);
 
   const onItemSelect = useCallback(
     (id: number): ChangeEventHandler<HTMLInputElement> =>
-      ({ target }) => {
-        return target.checked ? select(id) : deselect(id);
-      },
-    [deselect, select]
+      ({ target }) =>
+        setSelected(id, target.checked),
+    [setSelected]
   );
 
   return (
@@ -73,15 +75,15 @@ export default function Home() {
                 >
                   <h2>{value}</h2>
                   <div className={styles.items}>
-                    {manifest
+                    {current
                       .filter(({ category }) => category === value)
-                      .map(({ id, name, selected, link, type }) => (
+                      .map(({ name, link, type }, id) => (
                         <form key={`item-${id}`}>
                           <input
                             className={styles.itemControl}
                             id={`item-${id}`}
                             type="checkbox"
-                            checked={selected}
+                            checked={selected.has(id)}
                             onChange={onItemSelect(id)}
                           />
                           <label htmlFor={`item-${id}-checkbox`}>
@@ -101,24 +103,24 @@ export default function Home() {
                 <li>
                   Total Weight:{" "}
                   {(
-                    manifest
-                      .filter(({ selected }) => selected)
+                    current
+                      .filter((_, id) => selected.has(id))
                       .reduce((sum, { weightOz }) => sum + weightOz, 0) / 16
                   ).toFixed(1)}{" "}
                   lb
                 </li>
                 <li>
                   Total Volume:{" "}
-                  {manifest
-                    .filter(({ selected }) => selected)
+                  {current
+                    .filter((_, id) => selected.has(id))
                     .reduce((sum, { volumeL }) => sum + volumeL, 0)
                     .toFixed(1)}{" "}
                   Liters
                 </li>
                 <li>
                   Total Cost: $
-                  {manifest
-                    .filter(({ selected }) => selected)
+                  {current
+                    .filter((_, id) => selected.has(id))
                     .reduce((sum, { price }) => sum + price, 0)
                     .toFixed(1)}
                 </li>
