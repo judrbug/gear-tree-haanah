@@ -406,6 +406,24 @@ const current: Omit<GearItem, "id">[] = [
     weightOz: 2.6,
     volumeL: 0.2,
   },
+  {
+    name: "Earplugs",
+    link: "https://eargasm.com/collections/eargasm-product-line/products/eargasm-high-fidelity-earplugs",
+    category: Category.Sleeping,
+    type: ItemType.Earplugs,
+    price: 41.88,
+    weightOz: 0.8,
+    volumeL: 0.0,
+  },
+  {
+    name: "Kelty Redcloud 90",
+    link: "https://www.rei.com/rei-garage/product/878540/kelty-redcloud-90-backpack-mens",
+    category: Category.Bags,
+    type: ItemType.Backpack,
+    price: 139.93,
+    weightOz: 86.4,
+    volumeL: -90.0,
+  },
 ];
 
 export default current.map<GearItem>((item, id) => ({ ...item, id }));
