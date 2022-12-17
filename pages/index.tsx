@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useMemo, useCallback, useState } from "react";
+import { ChangeEventHandler, useCallback, useState, useEffect } from "react";
 import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
@@ -11,23 +11,17 @@ const SelectedKey = "GearSelected";
 const useLocalSelection = (
   key: string
 ): [Set<number>, (id: number, selected: boolean) => void] => {
-  const initialStorageValue = useMemo<Set<number>>(() => {
-    if (typeof window === "undefined") {
-      return new Set();
-    }
+  const [selected, setSelected] = useState<Set<number>>(new Set());
 
+  useEffect(() => {
     const extant = localStorage.getItem(key);
 
     if (extant === null) {
       localStorage.setItem(key, "[]");
-
-      return new Set<number>();
+    } else {
+      setSelected(new Set<number>(JSON.parse(extant)));
     }
-
-    return new Set<number>(JSON.parse(extant));
   }, [key]);
-
-  const [selected, setSelected] = useState<Set<number>>(initialStorageValue);
 
   const synchronize = (id: number, shouldSelect: boolean) => {
     if (shouldSelect) {
@@ -77,7 +71,7 @@ export default function Home() {
                   <div className={styles.items}>
                     {current
                       .filter(({ category }) => category === value)
-                      .map(({ name, link, type }, id) => (
+                      .map(({ name, link, type, id }) => (
                         <form key={`item-${id}`}>
                           <input
                             className={styles.itemControl}
@@ -104,7 +98,7 @@ export default function Home() {
                   Total Weight:{" "}
                   {(
                     current
-                      .filter((_, id) => selected.has(id))
+                      .filter(({ id }) => selected.has(id))
                       .reduce((sum, { weightOz }) => sum + weightOz, 0) / 16
                   ).toFixed(1)}{" "}
                   lb
@@ -112,7 +106,7 @@ export default function Home() {
                 <li>
                   Total Volume:{" "}
                   {current
-                    .filter((_, id) => selected.has(id))
+                    .filter(({ id }) => selected.has(id))
                     .reduce((sum, { volumeL }) => sum + volumeL, 0)
                     .toFixed(1)}{" "}
                   Liters
@@ -120,7 +114,7 @@ export default function Home() {
                 <li>
                   Total Cost: $
                   {current
-                    .filter((_, id) => selected.has(id))
+                    .filter(({ id }) => selected.has(id))
                     .reduce((sum, { price }) => sum + price, 0)
                     .toFixed(1)}
                 </li>

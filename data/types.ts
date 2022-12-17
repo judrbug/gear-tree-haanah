@@ -35,6 +35,7 @@ export enum ItemType {
 }
 
 export interface GearItem {
+  id: number;
   name: string;
   category: Category;
   type: ItemType;

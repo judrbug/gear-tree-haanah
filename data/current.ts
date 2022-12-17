@@ -1,6 +1,6 @@
 import { GearItem, Category, ItemType } from "./types";
 
-const current: GearItem[] = [
+const current: Omit<GearItem, "id">[] = [
   {
     name: "Kelty Cosmic 20F Regular",
     link: "https://www.rei.com/product/187507/kelty-cosmic-20-sleeping-bag-mens",
@@ -255,4 +255,4 @@ const current: GearItem[] = [
   },
 ];
 
-export default current;
+export default current.map<GearItem>((item, id) => ({ ...item, id }));
