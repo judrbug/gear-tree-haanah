@@ -9,6 +9,7 @@ export enum Category {
   Safety = "Safety",
   Photography = "Photography",
   Clothing = "Clothing",
+  Cooking = "Cooking",
 }
 
 export enum ItemType {

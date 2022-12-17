@@ -47,6 +47,15 @@ const current: Omit<GearItem, "id">[] = [
     volumeL: 1.97,
   },
   {
+    name: "MSR Pocket Rocket 2 Mini & Pot",
+    link: "https://www.rei.com/product/128867/msr-pocketrocket-2-mini-stove-kit",
+    category: Category.Cooking,
+    type: ItemType.Stove,
+    price: 89.95,
+    weightOz: 7.9,
+    volumeL: 1,
+  },
+  {
     name: "MSR Hyperflow",
     link: "https://www.msrgear.com/water-treatment/filters-and-purifiers/hyperflow-microfilter/56500.html",
     category: Category.Water,
@@ -256,7 +265,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Cannister",
     link: "https://www.rei.com/product/643061/snow-peak-gigapower-110-gold-fuel-canister-110g",
-    category: Category.Tools,
+    category: Category.Cooking,
     type: ItemType.Fuel,
     price: 5.95,
     weightOz: 7.4,
