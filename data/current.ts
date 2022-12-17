@@ -56,6 +56,15 @@ const current: Omit<GearItem, "id">[] = [
     volumeL: 1.8,
   },
   {
+    name: "MSR MiniWorks EX",
+    link: "https://www.rei.com/product/695265/msr-miniworks-ex-water-filter",
+    category: Category.Water,
+    type: ItemType.Filter,
+    price: 109.95,
+    weightOz: 18.5,
+    volumeL: 2.4,
+  },
+  {
     name: "Trekology Yizi Lite 750",
     link: "https://trekology.com/products/ultralight-camping-chair-yizi-lite-750g-hiking-backpacking-chairs",
     category: Category.Comfort,
