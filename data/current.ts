@@ -335,6 +335,15 @@ const current: Omit<GearItem, "id">[] = [
     volumeL: 3,
   },
   {
+    name: "Patagonia Better Sweater",
+    link: "https://www.rei.com/product/154148/patagonia-better-sweater-quarter-zip-fleece-pullover-mens",
+    category: Category.Clothing,
+    type: ItemType.Jacket,
+    price: 129.0,
+    weightOz: 15.2,
+    volumeL: 4,
+  },
+  {
     name: "Berghaus",
     link: "https://www.berghaus.com/men-s-mtn-seeker-gtx-jacket-black-red/13832711.html",
     category: Category.Clothing,
