@@ -161,7 +161,7 @@ const current: GearItem[] = [
     type: ItemType.Backpack,
     price: 100,
     weightOz: 48,
-    volumeL: 44,
+    volumeL: -44,
   },
   {
     name: "REI Trail 25",
@@ -170,7 +170,7 @@ const current: GearItem[] = [
     type: ItemType.Backpack,
     price: 79.95,
     weightOz: 28.8,
-    volumeL: 25,
+    volumeL: -25,
   },
   {
     name: "Black Diamond Sprinter",
