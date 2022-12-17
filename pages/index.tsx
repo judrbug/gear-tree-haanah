@@ -52,7 +52,10 @@ export default function Home() {
                             onChange={onItemSelect(id)}
                           />
                           <label htmlFor={`item-${id}-checkbox`}>
-                            {name} ({type}) - <a href={link}>Link</a>
+                            {name} ({type}) -{" "}
+                            <a href={link} target="_blank" rel="noreferrer">
+                              Link
+                            </a>
                           </label>
                         </form>
                       ))}
