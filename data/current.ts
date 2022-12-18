@@ -4,7 +4,7 @@ const volumeFromDimensions = (circumferenceInch: number, heightInch: number): nu
   const radius = 0.0254 * circumferenceInch / (2 * Math.PI);
   const height = 0.0254 * heightInch;
 
-  return 1000 * height *  Math.PI * radius**2;
+  return Number((1000 * height *  Math.PI * radius**2).toFixed(2));
 }
 
 const current: Omit<GearItem, "id">[] = [
