@@ -61,7 +61,7 @@ export default function Home() {
                   <div className={styles.items}>
                     {current
                       .filter(({ category }) => category === value)
-                      .map(({ name, link, type, id }) => (
+                      .map(({ name, link, type, weightOz, volumeL, id }) => (
                         <div className={styles.item}>
                           <label
                             htmlFor={`item-${id}-checkbox`}
@@ -76,10 +76,18 @@ export default function Home() {
                               onChange={onItemSelect(id)}
                             />
                             <span className={styles.checkmark} />
-                            {name} ({type}) -{" "}
-                            <a href={link} target="_blank" rel="noreferrer">
-                              Link
-                            </a>
+                            <div className={styles.itemDetails}>
+                              <div>
+                                {name} ({type}) -{" "}
+                                <a href={link} target="_blank" rel="noreferrer">
+                                  Link
+                                </a>
+                              </div>
+                              <div className={styles.itemValues}>
+                                <div>{weightOz} oz</div>
+                                <div>{volumeL} L</div>
+                              </div>
+                            </div>
                           </label>
                         </div>
                       ))}
@@ -95,7 +103,7 @@ export default function Home() {
               <div className={styles.totals}>
                 <span>
                   Total Weight:{" "}
-                  <span className={styles.total}>
+                  <span className={styles.totalWeight}>
                     {(
                       current
                         .filter(({ id }) => selected.has(id))
@@ -106,7 +114,7 @@ export default function Home() {
                 </span>
                 <span>
                   Total Volume:{" "}
-                  <span className={styles.total}>
+                  <span className={styles.totalVolume}>
                     {current
                       .filter(({ id }) => selected.has(id))
                       .reduce((sum, { volumeL }) => sum + volumeL, 0)

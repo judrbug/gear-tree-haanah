@@ -15,6 +15,15 @@
   --gb-dm-dark-aqua: #689d6a;
   --gb-dm-dark-orange: #d65d0e;
   --gb-dm-dark-gray: #928374;
+
+  --gb-dm-light-red: #fb4934;
+  --gb-dm-light-green: #b8bb26;
+  --gb-dm-light-yellow: #fabd2f;
+  --gb-dm-light-blue: #83a598;
+  --gb-dm-light-purple: #d3869b;
+  --gb-dm-light-aqua: #8ec07c;
+  --gb-dm-light-orange: #f38019;
+  --gb-dm-light-gray: #a89984;
 }
 
 * {
