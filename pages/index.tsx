@@ -62,24 +62,26 @@ export default function Home() {
                     {current
                       .filter(({ category }) => category === value)
                       .map(({ name, link, type, id }) => (
-                        <label
-                          htmlFor={`item-${id}-checkbox`}
-                          className={styles.itemCheckboxContainer}
-                          key={`item-${id}`}
-                        >
-                          <input
-                            className={styles.itemControl}
-                            id={`item-${id}-checkbox`}
-                            type="checkbox"
-                            checked={selected.has(id)}
-                            onChange={onItemSelect(id)}
-                          />
-                          <span className={styles.checkmark} />
-                          {name} ({type}) -{" "}
-                          <a href={link} target="_blank" rel="noreferrer">
-                            Link
-                          </a>
-                        </label>
+                        <div className={styles.item}>
+                          <label
+                            htmlFor={`item-${id}-checkbox`}
+                            className={styles.itemCheckboxContainer}
+                            key={`item-${id}`}
+                          >
+                            <input
+                              className={styles.itemControl}
+                              id={`item-${id}-checkbox`}
+                              type="checkbox"
+                              checked={selected.has(id)}
+                              onChange={onItemSelect(id)}
+                            />
+                            <span className={styles.checkmark} />
+                            {name} ({type}) -{" "}
+                            <a href={link} target="_blank" rel="noreferrer">
+                              Link
+                            </a>
+                          </label>
+                        </div>
                       ))}
                   </div>
                 </div>
