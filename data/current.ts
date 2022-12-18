@@ -155,7 +155,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Benchmade Griptillian",
     link: "https://www.knifecenter.com/item/BM551S30V/benchmade-griptilian-axis-lock-folding-knife-s30v-satin-drop-point-plain-blade-black-noryl-gtx-handles",
-    category: Category.Tools,
+    category: Category.Safety,
     type: ItemType.Knife,
     price: 144,
     weightOz: 3.8,
