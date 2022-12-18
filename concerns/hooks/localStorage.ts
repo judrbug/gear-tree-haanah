@@ -2,7 +2,12 @@ import { useState, useEffect, useCallback } from "react";
 
 const useLocalSelection = (
   key: string
-): [Set<number>, (id: number, selected: boolean) => void, () => void] => {
+): [
+  Set<number>,
+  (id: number, selected: boolean) => void,
+  () => void,
+  (ids: number[]) => void
+] => {
   const [selected, setSelected] = useState<Set<number>>(new Set());
 
   useEffect(() => {
@@ -36,7 +41,16 @@ const useLocalSelection = (
     setSelected(next);
   }, [key]);
 
-  return [selected, synchronize, reset];
+  const bulkSelect = useCallback(
+    (ids: number[]) => {
+      const next = new Set<number>(ids);
+      localStorage.setItem(key, JSON.stringify(Array.from(next)));
+      setSelected(next);
+    },
+    [key]
+  );
+
+  return [selected, synchronize, reset, bulkSelect];
 };
 
 export default useLocalSelection;
