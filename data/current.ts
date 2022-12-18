@@ -58,7 +58,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "MSR Hyperflow",
     link: "https://www.msrgear.com/water-treatment/filters-and-purifiers/hyperflow-microfilter/56500.html",
-    category: Category.Water,
+    category: Category.Cooking,
     type: ItemType.Filter,
     price: 134.95,
     weightOz: 10.6,
@@ -67,7 +67,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "MSR MiniWorks EX",
     link: "https://www.rei.com/product/695265/msr-miniworks-ex-water-filter",
-    category: Category.Water,
+    category: Category.Cooking,
     type: ItemType.Filter,
     price: 109.95,
     weightOz: 18.5,
@@ -76,7 +76,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Trekology Yizi Lite 750",
     link: "https://trekology.com/products/ultralight-camping-chair-yizi-lite-750g-hiking-backpacking-chairs",
-    category: Category.Comfort,
+    category: Category.Shelter,
     type: ItemType.Chair,
     price: 60.0,
     weightOz: 26.5,
@@ -94,7 +94,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Rallt Hammock Straps",
     link: "https://www.rallt.com/products/hammock-straps",
-    category: Category.Tools,
+    category: Category.Sleeping,
     type: ItemType.Cord,
     price: 19.99,
     weightOz: 11.4,
@@ -112,7 +112,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Steripen",
     link: "https://www.rei.com/product/847549/katadyn-steripen-ultra-uv-water-purifier",
-    category: Category.Water,
+    category: Category.Cooking,
     type: ItemType.Filter,
     price: 129.95,
     weightOz: 5.7,
@@ -139,7 +139,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Silky Pocket Boy - No Case",
     link: "https://silkysaws.com/silky-pocketboy-170mm-folding-saw/",
-    category: Category.Tools,
+    category: Category.Shelter,
     type: ItemType.Saw,
     price: 42.99,
     weightOz: 7.8,
@@ -229,7 +229,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "Bic Lighter",
     link: "https://us.bic.com/en_us/bic-lighters.html",
-    category: Category.Tools,
+    category: Category.Cooking,
     type: ItemType.Lighter,
     price: 2,
     weightOz: 0.7,
@@ -256,7 +256,7 @@ const current: Omit<GearItem, "id">[] = [
   {
     name: "UST Tube Tarp Cord",
     link: "https://www.rei.com/rei-garage/product/182803/ust-tube-tarp-10",
-    category: Category.Tools,
+    category: Category.Shelter,
     type: ItemType.Cord,
     price: 0,
     weightOz: 1.8,
