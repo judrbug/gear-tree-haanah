@@ -15,7 +15,7 @@ const TreeChart = dynamic(() => import("../components/tree-chart"), {
 const SelectedKey = "GearSelected";
 
 export default function Home() {
-  const [selected, setSelected] = useLocalSelection(SelectedKey);
+  const [selected, setSelected, reset] = useLocalSelection(SelectedKey);
 
   const onItemSelect = useCallback(
     (id: number): ChangeEventHandler<HTMLInputElement> =>
@@ -68,6 +68,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <button type="button" onClick={reset}>
+              Reset Selection
+            </button>
           </div>
           <div className={styles.statisticsContainer}>
             <h2>Statistics</h2>
