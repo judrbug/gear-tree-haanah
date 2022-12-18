@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const useLocalSelection = (
   key: string
-): [Set<number>, (id: number, selected: boolean) => void] => {
+): [
+  Set<number>,
+  (id: number, selected: boolean) => void,
+  () => void,
+  (ids: number[]) => void
+] => {
   const [selected, setSelected] = useState<Set<number>>(new Set());
 
   useEffect(() => {
@@ -15,19 +20,37 @@ const useLocalSelection = (
     }
   }, [key]);
 
-  const synchronize = (id: number, shouldSelect: boolean) => {
-    if (shouldSelect) {
-      selected.add(id);
-    } else {
-      selected.delete(id);
-    }
+  const synchronize = useCallback(
+    (id: number, shouldSelect: boolean) => {
+      if (shouldSelect) {
+        selected.add(id);
+      } else {
+        selected.delete(id);
+      }
 
-    const values = Array.from(selected);
-    localStorage.setItem(key, JSON.stringify(values));
-    setSelected(new Set(values));
-  };
+      const values = Array.from(selected);
+      localStorage.setItem(key, JSON.stringify(values));
+      setSelected(new Set(values));
+    },
+    [key, selected]
+  );
 
-  return [selected, synchronize];
+  const reset = useCallback(() => {
+    const next = new Set<number>();
+    localStorage.setItem(key, JSON.stringify(Array.from(next)));
+    setSelected(next);
+  }, [key]);
+
+  const bulkSelect = useCallback(
+    (ids: number[]) => {
+      const next = new Set<number>(ids);
+      localStorage.setItem(key, JSON.stringify(Array.from(next)));
+      setSelected(next);
+    },
+    [key]
+  );
+
+  return [selected, synchronize, reset, bulkSelect];
 };
 
 export default useLocalSelection;

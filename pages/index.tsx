@@ -15,7 +15,12 @@ const TreeChart = dynamic(() => import("../components/tree-chart"), {
 const SelectedKey = "GearSelected";
 
 export default function Home() {
-  const [selected, setSelected] = useLocalSelection(SelectedKey);
+  const [selected, setSelected, reset, bulkSelect] =
+    useLocalSelection(SelectedKey);
+
+  const selectAll = useCallback(() => {
+    bulkSelect(current.map(({ id }) => id));
+  }, [bulkSelect]);
 
   const onItemSelect = useCallback(
     (id: number): ChangeEventHandler<HTMLInputElement> =>
@@ -27,16 +32,25 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Gear Tree</title>
+        <title>⛰️ Gear Tree ⛰️</title>
         <meta name="description" content="Backpack Simulator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1>Gear Tree</h1>
+        <h1>⛰️ Gear Tree ⛰️</h1>
         <div className={styles.controlsContainer}>
           <div className={styles.categoriesContainer}>
-            <h2>Categories</h2>
+            <h2>⛺ Categories</h2>
+            <hr />
+            <div className={styles.selectControl}>
+              <button type="button" onClick={reset}>
+                Reset Selection
+              </button>
+              <button type="button" onClick={selectAll}>
+                Select All
+              </button>
+            </div>
             <div className={styles.categories}>
               {Object.entries(Category).map(([key, value]) => (
                 <div
@@ -47,22 +61,35 @@ export default function Home() {
                   <div className={styles.items}>
                     {current
                       .filter(({ category }) => category === value)
-                      .map(({ name, link, type, id }) => (
-                        <form key={`item-${id}`}>
-                          <input
-                            className={styles.itemControl}
-                            id={`item-${id}`}
-                            type="checkbox"
-                            checked={selected.has(id)}
-                            onChange={onItemSelect(id)}
-                          />
-                          <label htmlFor={`item-${id}-checkbox`}>
-                            {name} ({type}) -{" "}
-                            <a href={link} target="_blank" rel="noreferrer">
-                              Link
-                            </a>
+                      .map(({ name, link, type, weightOz, volumeL, id }) => (
+                        <div className={styles.item}>
+                          <label
+                            htmlFor={`item-${id}-checkbox`}
+                            className={styles.itemCheckboxContainer}
+                            key={`item-${id}`}
+                          >
+                            <input
+                              className={styles.itemControl}
+                              id={`item-${id}-checkbox`}
+                              type="checkbox"
+                              checked={selected.has(id)}
+                              onChange={onItemSelect(id)}
+                            />
+                            <span className={styles.checkmark} />
+                            <div className={styles.itemDetails}>
+                              <div>
+                                {name} ({type}) -{" "}
+                                <a href={link} target="_blank" rel="noreferrer">
+                                  Link
+                                </a>
+                              </div>
+                              <div className={styles.itemValues}>
+                                <div>{weightOz} oz</div>
+                                <div>{volumeL} L</div>
+                              </div>
+                            </div>
                           </label>
-                        </form>
+                        </div>
                       ))}
                   </div>
                 </div>
@@ -70,27 +97,32 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.statisticsContainer}>
-            <h2>Statistics</h2>
+            <h2>📈 Statistics</h2>
+            <hr />
             <div className={styles.statistics}>
-              <ul>
-                <li>
+              <div className={styles.totals}>
+                <span>
                   Total Weight:{" "}
-                  {(
-                    current
-                      .filter(({ id }) => selected.has(id))
-                      .reduce((sum, { weightOz }) => sum + weightOz, 0) / 16
-                  ).toFixed(1)}{" "}
-                  lb
-                </li>
-                <li>
+                  <span className={styles.totalWeight}>
+                    {(
+                      current
+                        .filter(({ id }) => selected.has(id))
+                        .reduce((sum, { weightOz }) => sum + weightOz, 0) / 16
+                    ).toFixed(1)}{" "}
+                    lb
+                  </span>
+                </span>
+                <span>
                   Total Volume:{" "}
-                  {current
-                    .filter(({ id }) => selected.has(id))
-                    .reduce((sum, { volumeL }) => sum + volumeL, 0)
-                    .toFixed(1)}{" "}
-                  Liters
-                </li>
-              </ul>
+                  <span className={styles.totalVolume}>
+                    {current
+                      .filter(({ id }) => selected.has(id))
+                      .reduce((sum, { volumeL }) => sum + volumeL, 0)
+                      .toFixed(1)}{" "}
+                    Liters
+                  </span>
+                </span>
+              </div>
             </div>
             <TreeChart data={Array.from(selected).map((id) => current[id])} />
           </div>
